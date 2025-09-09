@@ -174,8 +174,43 @@ resources/views/blog/create.blade.php
 ```html
 ```
 
+app/Models/Blog.php
+```php
+protected $fillable = [
+    'title',
+    'author',
+    'category_id',
+    'text',
+];
+```
+
 app/Http/Controllers/BlogController.php
 ```php
+public function create()
+{
+    $categories = Category::all();
+    return view('blog.create', compact('categories'));
+}
+```
+```php
+public function store(Request $request)
+{
+    $validated = $request->validate([
+        'title' => 'required|string|max:255',
+        'author' => 'required|string|max:100',
+        'category_id' => 'nullable|exists:categories,id',
+        'text' => 'required|string',
+    ]);
+
+    $post = Blog::create([
+        'title' => $validated['title'],
+        'author' => $validated['author'],
+        'category_id' => $validated['category_id'] ?? null,
+        'text' => $validated['text'],
+    ]);
+
+    return redirect()->route('blog.index')->with('success', 'Post created successfully!');
+}
 ```
 
 ## Blog Post Update
