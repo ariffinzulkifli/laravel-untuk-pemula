@@ -135,3 +135,60 @@ public function index()
     return view('blog.index', compact('categories', 'posts'));
 }
 ```
+
+## Blog Post Show
+resources/views/blog/show.blade.php
+```html
+@extends('layouts.utama')
+
+@section('kandungan')
+<!-- Main Content -->
+<main class="flex-grow px-6 py-10 max-w-3xl mx-auto">
+    <!-- Blog Title -->
+    <h1 class="text-4xl font-bold mb-4">{{ $post->title }}</h1>
+
+    <!-- Meta Info -->
+    <div class="text-sm text-gray-500 mb-6">
+    By <span class="text-gray-700 font-medium">{{ $post->author }}</span> &bull; Published on <span>{{ \Carbon\Carbon::parse($post->created_at)->format('d F Y') }}</span>
+    </div>
+
+    <!-- Featured Image -->
+    <img src="https://placehold.co/800x400" alt="Featured image" class="w-full h-auto rounded-md mb-8" />
+
+    <!-- Blog Post Body -->
+    {!! $post->text !!}
+</main>
+@endsection
+```
+app/Http/Controllers/BlogController.php
+```php
+public function show(Blog $blog)
+{
+    $post = $blog;
+    return view('blog.show', compact('post'));
+}
+```
+
+## Blog Post Create
+```html
+```
+
+app/Http/Controllers/BlogController.php
+```php
+```
+
+## Blog Post Update
+```html
+```
+
+app/Http/Controllers/BlogController.php
+```php
+```
+
+## Blog Post Delete
+```html
+```
+
+app/Http/Controllers/BlogController.php
+```php
+```
