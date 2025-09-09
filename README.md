@@ -64,3 +64,12 @@ Amir Hamzah
 ```
 1
 ```
+
+## Add Blog Resources to Routes
+```php
+Route::resource('blog', BlogController::class);
+```
+Add
+```php
+use App\Http\Controllers\BlogController;
+```
