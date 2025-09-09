@@ -76,12 +76,13 @@ use App\Http\Controllers\BlogController;
 
 ## Blog Post List
 resources/views/blog/index.blade.php
+using foreach
 ```html
 @extends('layouts.blog')
 
 @section('post')
 <!-- Blog Post Item -->
-{{-- @foreach ($posts as $post)
+@foreach ($posts as $post)
 <article class="flex mb-8 space-x-6">
     <img src="https://placehold.co/150" alt="Blog Post 1" class="w-[150px] h-[150px] object-cover rounded-md flex-shrink-0" />
     <div>
@@ -91,7 +92,15 @@ resources/views/blog/index.blade.php
         </p>
     </div>
 </article>
-@endforeach --}}
+@endforeach
+@endsection
+```
+using forelse to handle empty post
+```html
+@extends('layouts.blog')
+
+@section('post')
+<!-- Blog Post Item -->
 @forelse ($posts as $post)
 <article class="flex mb-8 space-x-6">
     <img src="https://placehold.co/150" alt="Blog Post 1" class="w-[150px] h-[150px] object-cover rounded-md flex-shrink-0" />
