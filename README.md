@@ -1,4 +1,4 @@
-# laravel-untuk-pemula
+# Laravel Untuk Pemula
 
 ## Make Model Category
 ```bash
