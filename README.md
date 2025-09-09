@@ -73,3 +73,65 @@ Add
 ```php
 use App\Http\Controllers\BlogController;
 ```
+
+## Blog Post List
+resources/views/blog/index.blade.php
+```html
+@extends('layouts.blog')
+
+@section('post')
+<!-- Blog Post Item -->
+{{-- @foreach ($posts as $post)
+<article class="flex mb-8 space-x-6">
+    <img src="https://placehold.co/150" alt="Blog Post 1" class="w-[150px] h-[150px] object-cover rounded-md flex-shrink-0" />
+    <div>
+        <h3 class="text-xl font-semibold mb-2 hover:text-blue-600 cursor-pointer"><a href="{{ route('blog.show', $post) }}">{{ $post->title }}</a></h3>
+        <p class="text-gray-700 line-clamp-3">
+            Tailwind CSS v4 introduces new utilities and improvements to help you build faster and cleaner designs with ease.
+        </p>
+    </div>
+</article>
+@endforeach --}}
+@forelse ($posts as $post)
+<article class="flex mb-8 space-x-6">
+    <img src="https://placehold.co/150" alt="Blog Post 1" class="w-[150px] h-[150px] object-cover rounded-md flex-shrink-0" />
+    <div>
+        <h3 class="text-xl font-semibold mb-2 flex items-center gap-2">
+            <!-- Post Title -->
+            <a href="{{ route('blog.show', $post) }}" class="hover:text-blue-600 cursor-pointer">
+                {{ $post->title }}
+            </a>
+            <!-- Edit Icon -->
+            <a href="{{ route('blog.edit', $post) }}" class="text-gray-400 hover:text-blue-500" title="Edit post">
+                ✎
+            </a>
+        </h3>
+        <p class="text-gray-700 line-clamp-3">
+            Tailwind CSS v4 introduces new utilities and improvements to help you build faster and cleaner designs with ease.
+        </p>
+    </div>
+</article>
+@empty
+<article class="flex mb-8 space-x-6">
+    <div>
+        <h3 class="text-xl font-semibold mb-2 hover:text-blue-600 cursor-pointer">No post available.</h3>
+        <p class="text-gray-700 line-clamp-3">
+            Tailwind CSS v4 introduces new utilities and improvements to help you build faster and cleaner designs with ease.
+        </p>
+    </div>
+</article>
+@endforelse
+@endsection
+```
+
+app/Http/Controllers/BlogController.php
+```php
+public function index()
+{
+    $categories = Category::all();
+    $posts = Blog::when(request('category_id'), function($query){
+        $query->where('category_id', request('category_id'));
+    })->orderBy('id', 'asc')->get();
+    return view('blog.index', compact('categories', 'posts'));
+}
+```
