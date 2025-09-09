@@ -41,7 +41,7 @@ php artisan migrate
 
 ### Langkah 4: Isi Data Sampel
 
-Menggunakan Adminer (atau mana-mana alat pengurusan pangkalan data), tambahkan kategori sampel ke jadual `categories`. Tetapkan kedua-dua `created_at` dan `updated_at` kepada **sekarang**:
+Menggunakan Adminer (atau mana-mana alat pengurusan pangkalan data), tambahkan kategori sampel ke jadual `categories`. Tetapkan kedua-dua `created_at` dan `updated_at` kepada **now**:
 
 1. **Tailwind CSS**
 2. **Responsive Design** 
