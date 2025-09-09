@@ -1,4 +1,4 @@
-# Tutorial Blog Laravel untuk Pemula
+# Laravel untuk Pemula
 
 Panduan komprehensif ini akan membimbing anda membina sistem blog lengkap dalam Laravel, merangkumi model, migration, controller, view, dan operasi CRUD. Pada akhir tutorial ini, anda akan mempunyai blog yang berfungsi sepenuhnya dengan kategori, pos, dan semua ciri penting.
 
