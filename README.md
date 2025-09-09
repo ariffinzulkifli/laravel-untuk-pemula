@@ -170,6 +170,7 @@ public function show(Blog $blog)
 ```
 
 ## Blog Post Create
+resources/views/blog/create.blade.php
 ```html
 ```
 
@@ -178,6 +179,7 @@ app/Http/Controllers/BlogController.php
 ```
 
 ## Blog Post Update
+resources/views/blog/edit.blade.php
 ```html
 ```
 
@@ -186,9 +188,26 @@ app/Http/Controllers/BlogController.php
 ```
 
 ## Blog Post Delete
+resources/views/blog/index.blade.php
+Add after edit icon
 ```html
+<!-- Delete Icon Form -->
+<form action="{{ route('blog.destroy', $post) }}" method="POST"
+    onsubmit="return confirm('Are you sure you want to delete this post?');"
+    class="inline">
+    @csrf
+    @method('DELETE')
+    <button type="submit" title="Delete Post" class="text-gray-400 hover:text-red-500 ml-1">
+        🗑️
+    </button>
+</form>
 ```
 
 app/Http/Controllers/BlogController.php
 ```php
+public function destroy(Blog $blog)
+{
+    $blog->delete();
+    return redirect()->route('blog.index')->with('success', 'Post deleted successfully!');
+}
 ```
