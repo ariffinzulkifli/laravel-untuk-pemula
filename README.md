@@ -3,7 +3,7 @@
 Panduan komprehensif ini akan membimbing anda membina sistem blog lengkap dalam Laravel, merangkumi model, migration, controller, view, dan operasi CRUD. Pada akhir tutorial ini, anda akan mempunyai blog yang berfungsi sepenuhnya dengan kategori, pos, dan semua ciri penting.
 
 ## Kandungan
-1. [Menyediakan Kategori](#menyediakan-kategori)
+1. [Mencipta Model Kategori](#mencipta-model-kategori)
 2. [Mencipta Model Blog](#mencipta-model-blog)
 3. [Menyediakan Routes](#menyediakan-routes)
 4. [Membina Antara Muka Blog](#membina-antara-muka-blog)
@@ -11,7 +11,7 @@ Panduan komprehensif ini akan membimbing anda membina sistem blog lengkap dalam 
 
 ---
 
-## Menyediakan Kategori
+## Mencipta Model Kategori
 
 ### Langkah 1: Cipta Model Category dan Migration
 
