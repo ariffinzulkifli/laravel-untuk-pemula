@@ -321,7 +321,93 @@ protected $fillable = [
 
 **Nota Keselamatan:** `$fillable` melindungi daripada kelemahan mass assignment dengan mentakrifkan secara eksplisit field mana yang boleh diberikan secara pukal.
 
-#### Langkah 2: Cipta Method Controller Form
+#### Langkah 2: Cipta Create Form
+
+Cipta `resources/views/blog/create.blade.php`:
+
+```html
+@extends('layouts.utama')
+
+@section('content')
+<main class="flex-grow px-6 py-10 max-w-3xl mx-auto">
+    <h1 class="text-3xl font-bold mb-6">Create New Post</h1>
+
+    <!-- Display Validation Errors -->
+    @if ($errors->any())
+        <div class="mb-6 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+            <ul class="list-disc list-inside">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    <!-- Create Post Form -->
+    <form action="{{ route('blog.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+        @csrf
+
+        <!-- Title -->
+        <div>
+            <label for="title" class="block font-medium text-gray-700 mb-1">Title</label>
+            <input type="text" name="title" id="title"
+                    class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    value="{{ old('title') }}" required>
+        </div>
+
+        <!-- Author -->
+        <div>
+            <label for="author" class="block font-medium text-gray-700 mb-1">Author</label>
+            <input type="text" name="author" id="author"
+                    class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    value="{{ old('author') }}" required>
+        </div>
+
+        <!-- Category (if available) -->
+        @if (!empty($categories))
+        <div>
+            <label for="category_id" class="block font-medium text-gray-700 mb-1">Category</label>
+            <select name="category_id" id="category_id"
+                    class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <option value="">-- Select Category --</option>
+                @foreach ($categories as $category)
+                    <option value="{{ $category->id }}" @selected(old('category_id') == $category->id)>
+                        {{ $category->name }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+        @endif
+
+        <!-- Post Text -->
+        <div>
+            <label for="text" class="block font-medium text-gray-700 mb-1">Content</label>
+            <textarea name="text" id="text" rows="10"
+                    class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    required>{{ old('text') }}</textarea>
+        </div>
+
+        <!-- Submit Button -->
+        <div>
+            <button type="submit"
+                    class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-2 rounded">
+                Publish Post
+            </button>
+        </div>
+    </form>
+</main>
+
+@endsection
+```
+
+**Ciri-ciri Form:**
+- Pengendalian ralat dengan mesej ralat yang bergaya
+- `enctype="multipart/form-data"` untuk kemungkinan upload fail pada masa hadapan
+- Helper `old()` mengekalkan data form pada ralat validasi
+- Dropdown kategori dengan pilihan kosong
+- Butang "Publish Post" yang menarik
+
+#### Langkah 3: Cipta Method Controller Form
 
 Tambahkan method-method ini ke `BlogController.php`:
 
