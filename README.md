@@ -1,9 +1,9 @@
-# Laravel untuk Pemula
+# Tutorial Blog Laravel untuk Pemula
 
 Panduan komprehensif ini akan membimbing anda membina sistem blog lengkap dalam Laravel, merangkumi model, migration, controller, view, dan operasi CRUD. Pada akhir tutorial ini, anda akan mempunyai blog yang berfungsi sepenuhnya dengan kategori, pos, dan semua ciri penting.
 
 ## Kandungan
-1. [Mencipta Model Kategori](#mencipta-model-kategori)
+1. [Menyediakan Kategori](#menyediakan-kategori)
 2. [Mencipta Model Blog](#mencipta-model-blog)
 3. [Menyediakan Routes](#menyediakan-routes)
 4. [Membina Antara Muka Blog](#membina-antara-muka-blog)
@@ -11,7 +11,7 @@ Panduan komprehensif ini akan membimbing anda membina sistem blog lengkap dalam 
 
 ---
 
-## Mencipta Model Kategori
+## Menyediakan Kategori
 
 ### Langkah 1: Cipta Model Category dan Migration
 
@@ -41,7 +41,7 @@ php artisan migrate
 
 ### Langkah 4: Isi Data Sampel
 
-Menggunakan Adminer (atau mana-mana alat pengurusan pangkalan data), tambahkan kategori sampel ke jadual `categories`. Tetapkan kedua-dua `created_at` dan `updated_at` kepada **now**:
+Menggunakan Adminer (atau mana-mana alat pengurusan pangkalan data), tambahkan kategori sampel ke jadual `categories`. Tetapkan kedua-dua `created_at` dan `updated_at` kepada **sekarang**:
 
 1. **Tailwind CSS**
 2. **Responsive Design** 
@@ -508,16 +508,3 @@ public function destroy(Blog $blog)
     return redirect()->route('blog.index')->with('success', 'Pos berjaya dipadamkan!');
 }
 ```
-
----
-
-## Ringkasan
-
-Anda kini mempunyai sistem blog Laravel yang lengkap dengan:
-
-✅ **Struktur Pangkalan Data** - Kategori dan pos Blog dengan hubungan yang betul  
-✅ **Operasi CRUD** - Fungsi Cipta, Baca, Kemaskini, Padam  
-✅ **Antara Muka Pengguna** - Reka bentuk yang bersih dan responsif dengan Tailwind CSS  
-✅ **Validasi Data** - Validasi sebelah pelayan untuk semua form  
-✅ **Pengendalian Ralat** - Paparan ralat yang anggun dan keadaan kosong  
-✅ **Pengalaman Pengguna** - Dialog pengesahan dan mesej kejayaan  
