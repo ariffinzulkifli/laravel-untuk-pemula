@@ -198,10 +198,32 @@ Kepada:
 </div>
 ```
 
+**3. Tukar categories sidebar kepada dynamic:**
+```html
+<ul class="space-y-3 text-gray-700 font-medium">
+    <li><a href="#" class="hover:text-blue-600">Tailwind CSS</a></li>
+    <li><a href="#" class="hover:text-blue-600">Responsive Design</a></li>
+    <li><a href="#" class="hover:text-blue-600">Web Performance</a></li>
+    <li><a href="#" class="hover:text-blue-600">JavaScript</a></li>
+    <li><a href="#" class="hover:text-blue-600">UX/UI</a></li>
+</ul>
+```
+
+Kepada:
+```html
+<ul class="space-y-3 text-gray-700 font-medium">
+    @foreach ($categories as $category)
+    <li><a href="?category_id={{ $category->id }}" class="hover:text-blue-600">{{ $category->name }}</a></li>
+    @endforeach
+</ul>
+```
+
 **Sebab Perubahan:**
 - `route('blog')` tidak wujud lagi - perlu gunakan `route('blog.index')`
 - Butang "Add Post" memberikan akses mudah untuk mencipta pos baru
 - Header yang dipertingkat dengan flexbox untuk layout yang lebih baik
+- Categories sidebar yang dynamic akan automatically sync dengan data pangkalan data
+- Filter categories akan berfungsi dengan betul tanpa perlu manual update
 
 ---
 
