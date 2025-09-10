@@ -370,7 +370,7 @@ protected $fillable = [
 
 **Nota Keselamatan:** `$fillable` melindungi daripada kelemahan mass assignment dengan mentakrifkan secara eksplisit field mana yang boleh diberikan secara pukal.
 
-#### Langkah 2: Cipta Form
+#### Langkah 2: Cipta Create Form
 
 Cipta `resources/views/blog/create.blade.php`:
 
