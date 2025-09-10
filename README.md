@@ -3,7 +3,7 @@
 Panduan komprehensif ini akan membimbing anda membina sistem blog lengkap dalam Laravel, merangkumi model, migration, controller, view, dan operasi CRUD. Pada akhir tutorial ini, anda akan mempunyai blog yang berfungsi sepenuhnya dengan kategori, pos, dan semua ciri penting.
 
 ## Kandungan
-1. [Menyediakan Kategori](#menyediakan-kategori)
+1. [Mencipta Model Category](#mencipta-model-category)
 2. [Mencipta Model Blog](#mencipta-model-blog)
 3. [Menyediakan Routes](#menyediakan-routes)
 4. [Membina Antara Muka Blog](#membina-antara-muka-blog)
@@ -153,6 +153,55 @@ use App\Http\Controllers\BlogController;
 - `GET /blog/{id}/edit` - Paparkan form edit
 - `PUT/PATCH /blog/{id}` - Kemaskini pos
 - `DELETE /blog/{id}` - Padam pos
+
+### Kemaskini Layout Files
+
+Selepas menambah resource routes, anda perlu mengemas kini fail layout untuk menggunakan nama route yang betul.
+
+#### Kemaskini resources/views/layouts/utama.blade.php
+
+Tukar baris ini:
+```html
+<li><a href="{{ route('blog') }}" class="hover:text-blue-500 transition">Blog</a></li>
+```
+
+Kepada:
+```html
+<li><a href="{{ route('blog.index') }}" class="hover:text-blue-500 transition">Blog</a></li>
+```
+
+#### Kemaskini resources/views/layouts/blog.blade.php
+
+**1. Tukar route link:**
+```html
+<li><a href="{{ route('blog') }}" class="hover:text-blue-500 transition">Blog</a></li>
+```
+
+Kepada:
+```html
+<li><a href="{{ route('blog.index') }}" class="hover:text-blue-500 transition">Blog</a></li>
+```
+
+**2. Tukar header dengan butang "Add Post":**
+```html
+<h2 class="text-3xl font-semibold">Latest Posts</h2>
+```
+
+Kepada:
+```html
+<div class="flex justify-between items-center mb-6">
+    <h2 class="text-3xl font-semibold">Latest Posts</h2>
+    <a href="{{ route('blog.create') }}"
+       class="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded">
+        + Add Post
+    </a>
+</div>
+```
+
+**Sebab Perubahan:**
+- `route('blog')` tidak wujud lagi - perlu gunakan `route('blog.index')`
+- Butang "Add Post" memberikan akses mudah untuk mencipta pos baru
+- Header yang dipertingkat dengan flexbox untuk layout yang lebih baik
 
 ---
 
@@ -321,7 +370,7 @@ protected $fillable = [
 
 **Nota Keselamatan:** `$fillable` melindungi daripada kelemahan mass assignment dengan mentakrifkan secara eksplisit field mana yang boleh diberikan secara pukal.
 
-#### Langkah 2: Cipta Create Form
+#### Langkah 2: Cipta Form
 
 Cipta `resources/views/blog/create.blade.php`:
 
@@ -594,3 +643,16 @@ public function destroy(Blog $blog)
     return redirect()->route('blog.index')->with('success', 'Pos berjaya dipadamkan!');
 }
 ```
+
+---
+
+## Ringkasan
+
+Anda kini mempunyai sistem blog Laravel yang lengkap dengan:
+
+✅ **Struktur Pangkalan Data** - Kategori dan pos Blog dengan hubungan yang betul  
+✅ **Operasi CRUD** - Fungsi Cipta, Baca, Kemaskini, Padam  
+✅ **Antara Muka Pengguna** - Reka bentuk yang bersih dan responsif dengan Tailwind CSS  
+✅ **Validasi Data** - Validasi sebelah pelayan untuk semua form  
+✅ **Pengendalian Ralat** - Paparan ralat yang anggun dan keadaan kosong  
+✅ **Pengalaman Pengguna** - Dialog pengesahan dan mesej kejayaan
